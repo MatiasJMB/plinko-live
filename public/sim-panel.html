@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plinko · Panel de simulación</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        background: #0c1018;
+        color: #fff;
+        font-family: system-ui, sans-serif;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0;
+        opacity: 0.9;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        width: min(420px, 90vw);
+      }
+      button {
+        padding: 16px;
+        font-size: 16px;
+        font-weight: 700;
+        border: 0;
+        border-radius: 12px;
+        color: #fff;
+        cursor: pointer;
+        transition: transform 0.06s ease, filter 0.15s ease;
+      }
+      button:active {
+        transform: scale(0.96);
+      }
+      button:hover {
+        filter: brightness(1.12);
+      }
+      .t0 { background: #9aa7b4; }
+      .t1 { background: #4cc9f0; }
+      .t2 { background: #b15cff; }
+      .t3 { background: #ffd166; color: #222; }
+      .t4 { background: #ff2e63; }
+      .wide { grid-column: 1 / -1; }
+      .ghost { background: #222b3a; }
+      small { opacity: 0.6; }
+    </style>
+  </head>
+  <body>
+    <h1>🎯 Panel de simulación</h1>
+    <div class="grid">
+      <button class="t0" data-tier="0">🌹 Rose · T0</button>
+      <button class="t1" data-tier="1">🍩 Doughnut · T1</button>
+      <button class="t2" data-tier="2">🕶️ Sunglasses · T2</button>
+      <button class="t3" data-tier="3">🌌 Galaxy · T3</button>
+      <button class="t4 wide" data-tier="4">⚡ Universe · T4 (MODO JEFE)</button>
+      <button class="ghost" id="burst">💥 Ráfaga x20</button>
+      <button class="ghost" id="streak">🔁 Streak (cuenta 1)</button>
+    </div>
+    <small>Abre el overlay en <b>/</b> en otra ventana para ver el efecto.</small>
+    <script>
+      async function sim(body) {
+        try {
+          await fetch('/sim', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(body),
+          });
+        } catch (e) {
+          console.error(e);
+        }
+      }
+      document.querySelectorAll('[data-tier]').forEach((b) => {
+        b.onclick = () => sim({ tier: Number(b.dataset.tier) });
+      });
+      document.getElementById('burst').onclick = () => {
+        for (let i = 0; i < 20; i++) sim({ tier: Math.floor(Math.random() * 3) });
+      };
+      document.getElementById('streak').onclick = () => sim({ diamonds: 10 });
+    </script>
+  </body>
+</html>

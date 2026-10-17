@@ -1,0 +1,19 @@
+{
+  "name": "plinko-live",
+  "version": "0.1.0",
+  "description": "Carrera de canicas Plinko interactiva para TikTok Live (overlay de streaming)",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node --env-file=.env src/server.js",
+    "sim": "SIM=1 node --env-file=.env src/server.js",
+    "dev": "SIM=1 node src/server.js"
+  },
+  "dependencies": {
+    "tiktok-live-connector": "^2.4.0",
+    "ws": "^8.21.0"
+  }
+}

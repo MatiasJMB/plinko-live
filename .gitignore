@@ -1,0 +1,16 @@
+node_modules/
+.env
+data/leaderboard.json
+*.log
+.env.*
+!.env.example
+dist/
+build/
+.dev-mysql/
+.bin/
+.DS_Store
+coverage/
+__pycache__/
+.venv/
+*.db
+*.sqlite

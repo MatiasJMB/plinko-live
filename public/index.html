@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plinko Live</title>
+    <link rel="stylesheet" href="/css/overlay.css" />
+  </head>
+  <body>
+    <canvas id="stage"></canvas>
+
+    <div id="status" class="status"></div>
+    <div id="scoreboard" class="panel panel-right"></div>
+    <div id="champions" class="panel panel-left"></div>
+
+    <div id="winner" class="winner"></div>
+    <div id="boss" class="boss"></div>
+
+    <!-- Matter.js como global (UMD) antes del módulo -->
+    <script src="/js/vendor/matter.min.js"></script>
+    <script type="module" src="/js/main.js"></script>
+  </body>
+</html>
